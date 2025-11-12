@@ -1,0 +1,60 @@
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.bak
+
+# Logs
+*.log
+logs/
+log/
+
+# ASP.NET
+*.dbmdl
+*.dbproj.schemaview
+*.pdb
+
+# Docker
+**/pgdata/
+**/postgres-data/
+**/rabbitmq-data/
+*.pid
+
+# Environment and secrets
+.env
+appsettings.Development.json
+appsettings.Local.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# EF Core migrations cache
+*.DesignTime.dbcontext.json
+
+# JetBrains Rider
+.idea/
+*.iml
+
+# Test coverage and reports
+TestResults/
+coverage/
+
+# Dependency folders
+node_modules/
+packages/
+
+# Publish output
+wwwroot/dist/
+publish/
