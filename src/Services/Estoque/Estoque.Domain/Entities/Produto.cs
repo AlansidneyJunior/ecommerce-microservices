@@ -29,34 +29,29 @@ public class Produto
     }
 
     // MÉTODOS DE NEGÓCIO
-    
-    // Atualizar estoque (pode ser positivo para adicionar ou negativo para reduzir)
+
     public void AtualizarEstoque(int quantidade)
     {
         var novaQuantidade = QuantidadeEstoque + quantidade;
-        
+
         if (novaQuantidade < 0)
-            throw new DomainException("Estoque não pode ficar negativo");
+            throw new DomainException($"Estoque insuficiente. Disponível: {QuantidadeEstoque}, Solicitado: {Math.Abs(quantidade)}");
 
         QuantidadeEstoque = novaQuantidade;
     }
 
-    // Atualizar apenas o preço
     public void AtualizarPreco(decimal novoPreco)
     {
         ValidarPreco(novoPreco);
         Preco = novoPreco;
     }
 
-    // Atualizar dados gerais do produto
-    public void AtualizarDados(string nome, string descricao, decimal preco)
+    public void AtualizarNomeDescricao(string nome, string descricao)
     {
         ValidarNome(nome);
-        ValidarPreco(preco);
 
         Nome = nome;
         Descricao = descricao ?? string.Empty;
-        Preco = preco;
     }
 
     public void Desativar()
@@ -70,14 +65,17 @@ public class Produto
     }
 
     // VALIDAÇÕES PRIVADAS (regras de negócio)
-    
+
     private void ValidarNome(string nome)
     {
         if (string.IsNullOrWhiteSpace(nome))
             throw new DomainException("Nome do produto é obrigatório");
 
+        if (nome.Length < 3)
+            throw new DomainException("Nome do produto deve ter no mínimo 3 caracteres");
+
         if (nome.Length > 200)
-            throw new DomainException("Nome do produto não pode ter mais de 200 caracteres");
+            throw new DomainException("Nome do produto deve ter no máximo 200 caracteres");
     }
 
     private void ValidarPreco(decimal preco)
